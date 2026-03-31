@@ -10,7 +10,6 @@
     @font-face { font-family: 'Bebas Neue'; font-style: normal; }
   </style>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 ```
 :root {
@@ -44,7 +43,7 @@ body {
   overflow: clip;
 }
 
-.hero::after { display: none; }
+
 
 .badge {
   display: inline-flex;
@@ -115,14 +114,7 @@ h1 em {
   box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
 }
 
-.form-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 30px; right: 30px; height: 3px;
-  background: linear-gradient(90deg, transparent, #c9a84c, transparent);
-  border-radius: 4px;
-  display: block;
-}
+
 
 .form-title {
   font-family: 'Bebas Neue', sans-serif;
@@ -200,12 +192,7 @@ input:focus, select:focus {
   overflow: hidden;
 }
 
-.cta-btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
-}
+
 
 .cta-btn:hover {
   transform: translateY(-2px);
@@ -484,7 +471,7 @@ input:focus, select:focus {
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; padding: 60px 5vw 50px; }
-  .hero::after { display: none; }
+
   .form-card { animation-name: fadeUp; }
   .two-col { grid-template-columns: 1fr; }
   .steps, .testi-grid { grid-template-columns: 1fr; }
