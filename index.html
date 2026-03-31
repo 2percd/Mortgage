@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Get Your Home Loan Sorted</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+```
+:root {
+  --navy: #0a0f1e;
+  --gold: #c9a84c;
+  --gold-light: #f0cc7a;
+  --white: #f5f4f0;
+  --mid: #6b7280;
+  --card-bg: #111827;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 80px 6vw 60px;
+  gap: 40px;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.2s forwards;
+}
+
+.badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); display: inline-block; }
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.4rem, 7vw, 6.2rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.35s forwards;
+}
+
+h1 em {
+  font-style: normal;
+  color: var(--gold);
+  display: block;
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(245,244,240,0.65);
+  max-width: 420px;
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.5s forwards;
+}
+
+.trust-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.65s forwards;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.82rem;
+  color: rgba(245,244,240,0.5);
+}
+
+.trust-item svg { color: var(--gold); flex-shrink: 0; }
+
+/* ── FORM CARD ── */
+.form-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 20px;
+  padding: 40px 36px;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  animation: fadeLeft 0.8s 0.4s forwards;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.form-card::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 30px; right: 30px; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border-radius: 0 0 4px 4px;
+}
+
+.form-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.9rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.form-sub {
+  font-size: 0.85rem;
+  color: rgba(245,244,240,0.45);
+  margin-bottom: 28px;
+  font-weight: 300;
+}
+
+.field-group {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(245,244,240,0.5);
+  font-weight: 500;
+}
+
+input, select {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  padding: 12px 16px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  width: 100%;
+}
+
+input::placeholder { color: rgba(245,244,240,0.25); }
+select { cursor: pointer; appearance: none; }
+select option { background: #1a2035; }
+
+input:focus, select:focus {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.06);
+}
+
+.two-col { grid-template-columns: 1fr 1fr; }
+
+.cta-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--gold), #a87c28);
+  border: none;
+  border-radius: 10px;
+  color: #0a0f1e;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(201,168,76,0.35);
+  filter: brightness(1.05);
+}
+
+.cta-btn:active { transform: translateY(0); }
+
+.privacy-note {
+  text-align: center;
+  font-size: 0.73rem;
+  color: rgba(245,244,240,0.3);
+  margin-top: 14px;
+}
+
+/* ── STATS STRIP ── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.06);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.stat {
+  padding: 36px 24px;
+  background: var(--navy);
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.2rem;
+  color: var(--gold);
+  line-height: 1;
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: rgba(245,244,240,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-top: 6px;
+  font-weight: 400;
+}
+
+/* ── HOW IT WORKS ── */
+.how {
+  padding: 100px 6vw;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  line-height: 1;
+  margin-bottom: 60px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.step {
+  background: var(--card-bg);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 32px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.step:hover {
+  border-color: rgba(201,168,76,0.3);
+  transform: translateY(-4px);
+}
+
+.step-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 5rem;
+  color: rgba(201,168,76,0.08);
+  position: absolute;
+  top: 10px; right: 18px;
+  line-height: 1;
+}
+
+.step-icon {
+  width: 46px; height: 46px;
+  background: rgba(201,168,76,0.12);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+  font-size: 1.3rem;
+}
+
+.step h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.step p {
+  font-size: 0.88rem;
+  color: rgba(245,244,240,0.5);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* ── TESTIMONIAL ── */
+.testi-section {
+  padding: 80px 6vw;
+  background: linear-gradient(180deg, transparent, rgba(201,168,76,0.04), transparent);
+}
+
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.testi-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 28px;
+}
+
+.stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 14px; letter-spacing: 2px; }
+
+.testi-text {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: rgba(245,244,240,0.7);
+  font-style: italic;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.testi-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #6b3a1e);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--navy);
+}
+
+.author-name { font-weight: 600; font-size: 0.88rem; }
+.author-loc { font-size: 0.75rem; color: var(--mid); font-weight: 300; }
+
+/* ── FOOTER CTA ── */
+.footer-cta {
+  padding: 100px 6vw;
+  text-align: center;
+}
+
+.footer-cta h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.footer-cta h2 em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+.footer-cta p {
+  font-size: 1rem;
+  color: rgba(245,244,240,0.5);
+  font-weight: 300;
+  margin-bottom: 36px;
+}
+
+.ghost-btn {
+  display: inline-block;
+  padding: 14px 36px;
+  border: 1.5px solid var(--gold);
+  border-radius: 10px;
+  color: var(--gold);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+.ghost-btn:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 28px 6vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  color: rgba(245,244,240,0.3);
+}
+
+.logo-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+  color: var(--white);
+}
+
+.logo-text span { color: var(--gold); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── SUCCESS STATE ── */
+.success-msg {
+  display: none;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.success-icon {
+  width: 64px; height: 64px;
+  background: rgba(201,168,76,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 1.8rem;
+}
+
+.success-msg h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  color: var(--gold);
+}
+
+.success-msg p {
+  font-size: 0.9rem;
+  color: rgba(245,244,240,0.5);
+  font-weight: 300;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding: 60px 5vw 50px; }
+  .hero::after { display: none; }
+  .form-card { animation-name: fadeUp; }
+  .two-col { grid-template-columns: 1fr; }
+  .steps, .testi-grid { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+@media (max-width: 500px) {
+  .stats { grid-template-columns: 1fr; gap: 0; }
+  .footer-bar { flex-direction: column; gap: 10px; text-align: center; }
+}
+```
+
+  </style>
+</head>
+<body>
+
+  <!-- ── HERO ── -->
+
+  <section class="hero">
+    <div class="hero-left">
+      <div class="badge"><span></span> Australia's Trusted Mortgage Brokers</div>
+      <h1>Your Home.<br><em>Your Rate.</em>Your Terms.</h1>
+      <p class="hero-sub">Stop guessing what you can borrow. Get a free, no-obligation assessment from an expert broker who shops 40+ lenders to find your best deal.</p>
+      <div class="trust-row">
+        <div class="trust-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          No credit check required
+        </div>
+        <div class="trust-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          Response within 2 hours
+        </div>
+        <div class="trust-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          100% free service
+        </div>
+      </div>
+    </div>
+
+```
+<div class="form-card" id="lead-form-card">
+  <div class="success-msg" id="success-msg">
+    <div class="success-icon">✓</div>
+    <h3>You're on the list!</h3>
+    <p>A broker will be in touch within 2 business hours to discuss your options.</p>
+  </div>
+  <div id="form-inner">
+    <p class="form-title">Get a Free Assessment</p>
+    <p class="form-sub">Takes less than 60 seconds — no commitment.</p>
+    <div class="field-group two-col">
+      <div class="field">
+        <label>First Name</label>
+        <input type="text" placeholder="Sarah" id="fname"/>
+      </div>
+      <div class="field">
+        <label>Last Name</label>
+        <input type="text" placeholder="Johnson" id="lname"/>
+      </div>
+    </div>
+    <div class="field-group">
+      <div class="field">
+        <label>Email Address</label>
+        <input type="email" placeholder="sarah@email.com" id="email"/>
+      </div>
+      <div class="field">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="0400 000 000" id="phone"/>
+      </div>
+    </div>
+    <div class="field-group two-col">
+      <div class="field">
+        <label>Loan Purpose</label>
+        <select id="purpose">
+          <option value="">Select…</option>
+          <option>Buy first home</option>
+          <option>Refinance existing loan</option>
+          <option>Investment property</option>
+          <option>Upgrade / next home</option>
+          <option>Construction loan</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Loan Amount</label>
+        <select id="amount">
+          <option value="">Select…</option>
+          <option>Under $300k</option>
+          <option>$300k – $500k</option>
+          <option>$500k – $800k</option>
+          <option>$800k – $1.2M</option>
+          <option>$1.2M+</option>
+        </select>
+      </div>
+    </div>
+    <button class="cta-btn" onclick="submitForm()">Get My Free Assessment →</button>
+    <p class="privacy-note">🔒 Your details are safe. We never share your information.</p>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ── STATS ── -->
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-num">40+</span>
+      <div class="stat-label">Lenders compared</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num">98%</span>
+      <div class="stat-label">Client satisfaction</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num">$2B+</span>
+      <div class="stat-label">Loans settled</div>
+    </div>
+  </div>
+
+  <!-- ── HOW IT WORKS ── -->
+
+  <section class="how">
+    <p class="section-label">The process</p>
+    <h2 class="section-title">Simple. Fast. Sorted.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-icon">📋</div>
+        <h3>Tell us your situation</h3>
+        <p>Fill out the quick form above. No paperwork, no commitment — just a few details to get started.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-icon">🔍</div>
+        <h3>We compare 40+ lenders</h3>
+        <p>Your dedicated broker searches our panel of banks and lenders to find the lowest rate that fits you.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-icon">🏡</div>
+        <h3>Get approved &amp; move in</h3>
+        <p>We handle the paperwork, chase the bank, and keep you updated every step of the way.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ── -->
+
+  <section class="testi-section">
+    <div style="max-width:1100px;margin:0 auto;">
+      <p class="section-label">Client Stories</p>
+      <h2 class="section-title" style="margin-bottom:40px">Real people.<br>Real results.</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"I didn't think I'd qualify after being self-employed for only a year. They found me a great rate and had approval in 10 days. Absolutely blown away."</p>
+        <div class="testi-author">
+          <div class="avatar">MK</div>
+          <div>
+            <div class="author-name">Michael K.</div>
+            <div class="author-loc">First Home Buyer · Sydney</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Refinancing saved us $6,200 a year. I wish we'd done it sooner. The whole process took less than 3 weeks and they handled everything."</p>
+        <div class="testi-author">
+          <div class="avatar">JL</div>
+          <div>
+            <div class="author-name">James &amp; Laura T.</div>
+            <div class="author-loc">Refinance · Melbourne</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"As investors, we needed someone who understood our portfolio. They structured two loans perfectly and we settled both properties simultaneously."</p>
+        <div class="testi-author">
+          <div class="avatar">AP</div>
+          <div>
+            <div class="author-name">Aisha P.</div>
+            <div class="author-loc">Property Investor · Brisbane</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER CTA ── -->
+
+  <section class="footer-cta">
+    <h2>Ready to find your<br><em>best rate?</em></h2>
+    <p>Join thousands of Australians who've trusted us to get their home loan sorted.</p>
+    <a href="#lead-form-card" class="ghost-btn" onclick="document.getElementById('fname').focus()">Start Free Assessment</a>
+  </section>
+
+  <!-- ── FOOTER BAR ── -->
+
+  <div class="footer-bar">
+    <div class="logo-text">CLEAR<span>PATH</span> LENDING</div>
+    <div>© 2025 · Australian Credit Licence 000000 · All rates subject to lender approval.</div>
+  </div>
+
+  <script>
+    function submitForm() {
+      const fname = document.getElementById('fname').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+
+      if (!fname || !email || !phone) {
+        // Simple shake animation on empty
+        const btn = document.querySelector('.cta-btn');
+        btn.style.animation = 'none';
+        btn.style.background = 'linear-gradient(135deg,#c04a4a,#8b2020)';
+        btn.textContent = 'Please fill in required fields';
+        setTimeout(() => {
+          btn.style.background = '';
+          btn.textContent = 'Get My Free Assessment →';
+        }, 2000);
+        return;
+      }
+
+      // Show success
+      document.getElementById('form-inner').style.display = 'none';
+      const s = document.getElementById('success-msg');
+      s.style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
