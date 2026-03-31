@@ -53,15 +53,7 @@ body::before {
   overflow: hidden;
 }
 
-.hero::after {
-  content: '';
-  position: absolute;
-  top: -200px; right: -200px;
-  width: 700px; height: 700px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 70%);
-  pointer-events: none;
-}
+.hero::after { display: none; }
 
 .badge {
   display: inline-flex;
@@ -586,7 +578,7 @@ input:focus, select:focus {
       <div class="field">
         <label>Loan Purpose</label>
         <select id="purpose">
-          <option value="">Select…</option>
+          <option value="">Select...</option>
           <option>Buy first home</option>
           <option>Refinance existing loan</option>
           <option>Investment property</option>
@@ -597,7 +589,7 @@ input:focus, select:focus {
       <div class="field">
         <label>Loan Amount</label>
         <select id="amount">
-          <option value="">Select…</option>
+          <option value="">Select...</option>
           <option>Under $300k</option>
           <option>$300k – $500k</option>
           <option>$500k – $800k</option>
