@@ -10,48 +10,49 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #0a0f1e; color: #f5f4f0; font-family: 'DM Sans', sans-serif; }
 
-```
-.hero { padding: 60px 20px 40px; }
-
-.badge-text {
-  display: block;
-  font-size: 0.82rem;
-  font-weight: 400;
-  color: #c9a84c;
-  margin-bottom: 28px;
+.badge {
+display: inline-block;
+background: rgba(201,168,76,0.15);
+box-shadow: 0 0 0 2px #c9a84c;
+border-radius: 50px; padding: 7px 18px;
+font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+text-transform: uppercase; color: #f0cc7a;
 }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #c9a84c; display: inline-block; }
 
-h1 { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; line-height: 0.95; margin-bottom: 20px; }
+.hero { padding: 60px 5vw 40px; }
+.badge-wrap { display: block; margin-bottom: 32px; }
+h1 { font-family: ‘Bebas Neue’, sans-serif; font-size: 4rem; line-height: 0.95; margin-bottom: 20px; }
 h1 .gold { color: #c9a84c; display: block; }
 .hero-sub { font-size: 1rem; font-weight: 300; line-height: 1.65; color: rgba(245,244,240,0.65); margin-bottom: 28px; }
 
-.trust { display: flex; flex-direction: column; gap: 10px; margin-bottom: 40px; }
-.trust-item { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: rgba(245,244,240,0.55); }
+.trust { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 40px; }
+.trust-item { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: rgba(245,244,240,0.55); }
 .tick { color: #c9a84c; font-weight: 700; }
 
-.compare-line { text-align: center; font-size: 0.88rem; font-style: italic; color: rgba(245,244,240,0.45); margin-bottom: 16px; padding: 0 20px; }
+.compare-line { text-align: center; font-size: 0.88rem; font-style: italic; color: rgba(245,244,240,0.45); margin-bottom: 16px; padding: 0 5vw; }
 
-.form-wrap { padding: 0 20px 60px; }
+.form-wrap { padding: 0 5vw 60px; }
 .form-card {
-  background: #111827; border: 1px solid rgba(201,168,76,0.2);
-  border-top: 3px solid #c9a84c; border-radius: 16px; padding: 32px 24px;
+background: #111827; border: 1px solid rgba(201,168,76,0.2);
+border-top: 3px solid #c9a84c; border-radius: 16px; padding: 32px 24px;
 }
-.form-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.04em; margin-bottom: 4px; }
+.form-title { font-family: ‘Bebas Neue’, sans-serif; font-size: 1.8rem; letter-spacing: 0.04em; margin-bottom: 4px; }
 .form-sub { font-size: 0.85rem; color: rgba(245,244,240,0.45); margin-bottom: 24px; font-weight: 300; }
 
 .field { margin-bottom: 14px; }
 label { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(245,244,240,0.5); font-weight: 500; margin-bottom: 6px; }
 input, select {
-  width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 10px; color: #f5f4f0; font-family: 'DM Sans', sans-serif;
-  font-size: 0.95rem; padding: 12px 16px; outline: none;
-  -webkit-appearance: none; appearance: none;
+width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+border-radius: 10px; color: #f5f4f0; font-family: ‘DM Sans’, sans-serif;
+font-size: 0.95rem; padding: 12px 16px; outline: none;
+-webkit-appearance: none; appearance: none;
 }
 input:focus, select:focus {
-  border: 2px solid #c9a84c !important;
-  box-shadow: 0 0 0 3px rgba(201,168,76,0.25) !important;
-  background: rgba(201,168,76,0.05);
-  outline: none !important;
+border: 2px solid #c9a84c !important;
+box-shadow: 0 0 0 3px rgba(201,168,76,0.25) !important;
+background: rgba(201,168,76,0.05);
+outline: none !important;
 }
 input::placeholder { color: rgba(245,244,240,0.25); }
 select { cursor: pointer; }
@@ -59,54 +60,48 @@ select option { background: #1a2035; }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
 .cta-btn {
-  width: 100%; padding: 15px; margin-top: 6px;
-  background: linear-gradient(135deg, #c9a84c, #a87c28);
-  border: none; border-radius: 10px; color: #0a0f1e;
-  font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 700;
-  letter-spacing: 0.04em; cursor: pointer; display: block;
+width: 100%; padding: 15px; margin-top: 6px;
+background: linear-gradient(135deg, #c9a84c, #a87c28);
+border: none; border-radius: 10px; color: #0a0f1e;
+font-family: ‘DM Sans’, sans-serif; font-size: 1rem; font-weight: 700;
+letter-spacing: 0.04em; cursor: pointer; display: block;
 }
 .privacy { text-align: center; font-size: 0.73rem; color: rgba(245,244,240,0.3); margin-top: 12px; }
 
 .stats { border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
 .stat { padding: 36px 24px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.06); }
 .stat:last-child { border-bottom: none; }
-.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; color: #c9a84c; line-height: 1; display: block; }
+.stat-num { font-family: ‘Bebas Neue’, sans-serif; font-size: 3.2rem; color: #c9a84c; line-height: 1; display: block; }
 .stat-label { font-size: 0.8rem; color: rgba(245,244,240,0.45); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 6px; }
 
-.how { padding: 70px 20px; }
+.how { padding: 70px 5vw; }
 .section-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: #c9a84c; font-weight: 500; margin-bottom: 10px; }
-.section-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; line-height: 1; margin-bottom: 40px; }
+.section-title { font-family: ‘Bebas Neue’, sans-serif; font-size: 2.6rem; line-height: 1; margin-bottom: 40px; }
 .step { background: #111827; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 28px; margin-bottom: 16px; }
 .step-icon { font-size: 1.4rem; margin-bottom: 12px; }
 .step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
 .step p { font-size: 0.88rem; color: rgba(245,244,240,0.5); line-height: 1.6; font-weight: 300; }
 
-.footer-cta { padding: 70px 20px; text-align: center; }
-.footer-cta h2 { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; line-height: 1; margin-bottom: 16px; }
+.footer-cta { padding: 70px 5vw; text-align: center; }
+.footer-cta h2 { font-family: ‘Bebas Neue’, sans-serif; font-size: 3rem; line-height: 1; margin-bottom: 16px; }
 .footer-cta h2 .gold { color: #c9a84c; }
 .footer-cta p { font-size: 0.95rem; color: rgba(245,244,240,0.5); font-weight: 300; margin-bottom: 28px; }
-.ghost-btn {
-  display: inline-block; padding: 14px 36px; border: none;
-  border-radius: 10px; color: #0a0f1e; font-size: 1rem; font-weight: 700;
-  cursor: pointer; background: linear-gradient(135deg, #c9a84c, #a87c28);
-  font-family: 'DM Sans', sans-serif; letter-spacing: 0.04em;
-}
+.ghost-btn { display: inline-block; padding: 13px 32px; border: 1.5px solid #c9a84c; border-radius: 10px; color: #c9a84c; font-size: 0.95rem; font-weight: 600; text-decoration: none; cursor: pointer; background: none; font-family: ‘DM Sans’, sans-serif; }
 
-.footer-bar { border-top: 1px solid rgba(255,255,255,0.06); padding: 24px 20px; text-align: center; font-size: 0.75rem; color: rgba(245,244,240,0.3); }
-.logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: #f5f4f0; margin-bottom: 8px; }
+.footer-bar { border-top: 1px solid rgba(255,255,255,0.06); padding: 24px 5vw; text-align: center; font-size: 0.75rem; color: rgba(245,244,240,0.3); }
+.logo { font-family: ‘Bebas Neue’, sans-serif; font-size: 1.4rem; color: #f5f4f0; margin-bottom: 8px; }
 
 .success-msg { display: none; text-align: center; padding: 20px 0; }
-.success-msg h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: #c9a84c; margin-bottom: 8px; }
+.success-msg h3 { font-family: ‘Bebas Neue’, sans-serif; font-size: 1.8rem; color: #c9a84c; margin-bottom: 8px; }
 .success-msg p { font-size: 0.9rem; color: rgba(245,244,240,0.5); font-weight: 300; }
-```
 
   </style>
 </head>
 <body>
 
   <section class="hero">
-    <span class="badge-text">&#9679; Helping Perth Locals Find the Right Home Loan</span>
-    <h1>How Much Can You Borrow?<span class="gold">Find Out in 60 Seconds.</span></h1>
+    <div class="badge-wrap"><div class="badge"><span class="badge-dot"></span> Helping Perth Locals Find the Right Home Loan</div></div>
+    <h1>Find Out How Much You Can Borrow<span class="gold">in 60 Seconds</span></h1>
     <p class="hero-sub">Get matched with a local Perth mortgage broker who compares 40+ lenders to find your best rate.</p>
     <div class="trust">
       <div class="trust-item"><span class="tick">&#10003;</span> No credit check required</div>
