@@ -11,8 +11,8 @@
     body { background: #0a0f1e; color: #f5f4f0; font-family: 'DM Sans', sans-serif; }
 
 ```
-.hero { padding: 60px 5vw 40px; }
-.badge-wrap { display: block; margin-bottom: 32px; text-align: left; }
+.hero { padding: 60px 5vw 40px; overflow: hidden; }
+.badge-wrap { display: block; margin-bottom: 32px; padding: 0; }
 .badge {
   display: inline-block;
   background: #1a1200;
@@ -25,6 +25,10 @@
   text-transform: uppercase;
   color: #c9a84c;
   -webkit-border-radius: 50px;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #c9a84c; display: inline-block; vertical-align: middle; margin-right: 6px; }
 h1 { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; line-height: 0.95; margin-bottom: 20px; }
