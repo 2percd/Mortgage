@@ -11,44 +11,71 @@
     body { background: #0a0f1e; color: #f5f4f0; font-family: 'DM Sans', sans-serif; }
 
 ```
-/* HERO */
-.hero { padding: 50px 24px 40px 24px; }
+.hero { padding: 50px 24px 40px; }
+
 .badge {
-  display: inline-block;
-  background: #1a1200;
-  border: 2px solid #c9a84c;
-  border-radius: 50px;
-  padding: 7px 16px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
   color: #c9a84c;
+  margin-bottom: 28px;
+  letter-spacing: 0.03em;
+}
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+h1 .gold { color: #c9a84c; display: block; }
+
+.hero-sub {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(245,244,240,0.65);
   margin-bottom: 24px;
 }
-.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #c9a84c; display: inline-block; vertical-align: middle; margin-right: 6px; }
-h1 { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; line-height: 1.05; margin-bottom: 16px; }
-h1 .gold { color: #c9a84c; display: block; }
-.hero-sub { font-size: 1rem; font-weight: 300; line-height: 1.6; color: rgba(245,244,240,0.65); margin-bottom: 24px; }
+
 .trust { display: flex; flex-direction: column; gap: 10px; margin-bottom: 40px; }
 .trust-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: rgba(245,244,240,0.6); }
 .tick { color: #c9a84c; font-weight: 700; }
 
-/* COMPARE LINE */
-.compare-line { text-align: center; font-size: 0.88rem; font-style: italic; color: rgba(245,244,240,0.4); margin-bottom: 16px; padding: 0 24px; }
+.compare-line {
+  text-align: center;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: rgba(245,244,240,0.4);
+  margin-bottom: 16px;
+  padding: 0 24px;
+}
 
-/* FORM */
 .form-wrap { padding: 0 24px 60px; }
-.form-card { background: #111827; border: 1px solid rgba(201,168,76,0.2); border-top: 3px solid #c9a84c; border-radius: 16px; padding: 28px 20px; }
+.form-card {
+  background: #111827;
+  border: 1px solid rgba(201,168,76,0.2);
+  border-top: 3px solid #c9a84c;
+  border-radius: 16px;
+  padding: 28px 20px;
+}
 .form-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.04em; margin-bottom: 4px; }
 .form-sub { font-size: 0.85rem; color: rgba(245,244,240,0.45); margin-bottom: 20px; font-weight: 300; }
+
 .field { margin-bottom: 14px; }
 label { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(245,244,240,0.5); font-weight: 500; margin-bottom: 6px; }
 input, select {
-  width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 10px; color: #f5f4f0; font-family: 'DM Sans', sans-serif;
-  font-size: 0.95rem; padding: 12px 14px; outline: none;
-  -webkit-appearance: none; appearance: none;
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  color: #f5f4f0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  padding: 12px 14px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 input:focus, select:focus {
   border: 2px solid #c9a84c !important;
@@ -60,6 +87,7 @@ input::placeholder { color: rgba(245,244,240,0.25); }
 select { cursor: pointer; }
 select option { background: #1a2035; }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
 .cta-btn {
   width: 100%; padding: 15px; margin-top: 8px;
   background: linear-gradient(135deg, #c9a84c, #a87c28);
@@ -69,14 +97,12 @@ select option { background: #1a2035; }
 }
 .privacy { text-align: center; font-size: 0.73rem; color: rgba(245,244,240,0.3); margin-top: 10px; }
 
-/* STATS */
 .stats { border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
 .stat { padding: 32px 24px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.06); }
 .stat:last-child { border-bottom: none; }
 .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: #c9a84c; line-height: 1; display: block; }
 .stat-label { font-size: 0.8rem; color: rgba(245,244,240,0.45); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 6px; }
 
-/* HOW IT WORKS */
 .how { padding: 60px 24px; }
 .section-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: #c9a84c; font-weight: 500; margin-bottom: 10px; }
 .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; line-height: 1; margin-bottom: 32px; }
@@ -85,18 +111,20 @@ select option { background: #1a2035; }
 .step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
 .step p { font-size: 0.88rem; color: rgba(245,244,240,0.5); line-height: 1.6; font-weight: 300; }
 
-/* FOOTER CTA */
 .footer-cta { padding: 60px 24px; text-align: center; }
 .footer-cta h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; line-height: 1; margin-bottom: 14px; }
 .footer-cta h2 .gold { color: #c9a84c; }
 .footer-cta p { font-size: 0.95rem; color: rgba(245,244,240,0.5); font-weight: 300; margin-bottom: 24px; }
-.ghost-btn { display: inline-block; padding: 14px 36px; border: none; border-radius: 10px; color: #0a0f1e; font-size: 1rem; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, #c9a84c, #a87c28); font-family: 'DM Sans', sans-serif; letter-spacing: 0.04em; }
+.ghost-btn {
+  display: inline-block; padding: 14px 36px; border: none;
+  border-radius: 10px; color: #0a0f1e; font-size: 1rem; font-weight: 700;
+  cursor: pointer; background: linear-gradient(135deg, #c9a84c, #a87c28);
+  font-family: 'DM Sans', sans-serif; letter-spacing: 0.04em;
+}
 
-/* FOOTER */
 .footer-bar { border-top: 1px solid rgba(255,255,255,0.06); padding: 24px; text-align: center; font-size: 0.75rem; color: rgba(245,244,240,0.3); }
 .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: #f5f4f0; margin-bottom: 6px; }
 
-/* SUCCESS */
 .success-msg { display: none; text-align: center; padding: 20px 0; }
 .success-msg h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: #c9a84c; margin-bottom: 8px; }
 .success-msg p { font-size: 0.9rem; color: rgba(245,244,240,0.5); font-weight: 300; }
@@ -107,7 +135,7 @@ select option { background: #1a2035; }
 <body>
 
   <section class="hero">
-    <div><span class="badge"><span class="badge-dot"></span> Perth Home Loan Experts</span></div>
+    <p class="badge">&#9679; Helping Perth Locals Find the Right Home Loan</p>
     <h1>How Much Can You Borrow?<span class="gold">Find Out in 60 Seconds.</span></h1>
     <p class="hero-sub">Get matched with a local Perth mortgage broker who compares 40+ lenders to find your best rate.</p>
     <div class="trust">
