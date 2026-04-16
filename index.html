@@ -5,26 +5,25 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Get Your Home Loan Sorted</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #0a0f1e; color: #f5f4f0; font-family: 'DM Sans', sans-serif; }
 
+```
 .badge {
-display: inline-block;
-background: rgba(201,168,76,0.15);
-box-shadow: 0 0 0 2px #c9a84c;
-border-radius: 50px; padding: 7px 18px;
-font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
-text-transform: uppercase; color: #f0cc7a;
+  display: inline-block;
+  background: rgba(201,168,76,0.15);
+  box-shadow: 0 0 0 2px #c9a84c;
+  border-radius: 50px; padding: 7px 18px;
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #f0cc7a;
 }
 .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #c9a84c; display: inline-block; }
 
 .hero { padding: 60px 5vw 40px; }
 .badge-wrap { display: block; margin-bottom: 32px; }
-h1 { font-family: ‘Bebas Neue’, Arial, sans-serif; font-size: 3.2rem; line-height: 1; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.02em; }
+h1 { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; line-height: 0.95; margin-bottom: 20px; }
 h1 .gold { color: #c9a84c; display: block; }
 .hero-sub { font-size: 1rem; font-weight: 300; line-height: 1.65; color: rgba(245,244,240,0.65); margin-bottom: 28px; }
 
@@ -32,94 +31,101 @@ h1 .gold { color: #c9a84c; display: block; }
 .trust-item { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: rgba(245,244,240,0.55); }
 .tick { color: #c9a84c; font-weight: 700; }
 
-.compare-line { text-align: center; font-size: 0.88rem; font-style: italic; color: rgba(245,244,240,0.45); margin-bottom: 16px; padding: 0 5vw; }
-
 .form-wrap { padding: 0 5vw 60px; }
 .form-card {
-background: #111827; border: 1px solid rgba(201,168,76,0.2);
-border-top: 3px solid #c9a84c; border-radius: 16px; padding: 32px 24px;
+  background: #111827; border: 1px solid rgba(201,168,76,0.2);
+  border-top: 3px solid #c9a84c; border-radius: 16px; padding: 32px 24px;
 }
-.form-title { font-family: ‘Bebas Neue’, sans-serif; font-size: 1.8rem; letter-spacing: 0.04em; margin-bottom: 4px; }
+.form-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.04em; margin-bottom: 4px; }
 .form-sub { font-size: 0.85rem; color: rgba(245,244,240,0.45); margin-bottom: 24px; font-weight: 300; }
 
 .field { margin-bottom: 14px; }
 label { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(245,244,240,0.5); font-weight: 500; margin-bottom: 6px; }
 input, select {
-width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-border-radius: 10px; color: #f5f4f0; font-family: ‘DM Sans’, sans-serif;
-font-size: 0.95rem; padding: 12px 16px; outline: none;
--webkit-appearance: none; appearance: none;
+  width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px; color: #f5f4f0; font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem; padding: 12px 16px; outline: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 input:focus, select:focus {
-border: 2px solid #c9a84c !important;
-box-shadow: 0 0 0 3px rgba(201,168,76,0.25) !important;
-background: rgba(201,168,76,0.05);
-outline: none !important;
+  border: 2px solid #c9a84c !important;
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.25) !important;
+  background: rgba(201,168,76,0.05);
+  outline: none !important;
 }
-input::placeholder { color: rgba(245,244,240,0.25); }
-select { cursor: pointer; }
+select { appearance: none; cursor: pointer; }
 select option { background: #1a2035; }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
 .cta-btn {
-width: 100%; padding: 15px; margin-top: 6px;
-background: linear-gradient(135deg, #c9a84c, #a87c28);
-border: none; border-radius: 10px; color: #0a0f1e;
-font-family: ‘DM Sans’, sans-serif; font-size: 1rem; font-weight: 700;
-letter-spacing: 0.04em; cursor: pointer; display: block;
+  width: 100%; padding: 15px; margin-top: 6px;
+  background: linear-gradient(135deg, #c9a84c, #a87c28);
+  border: none; border-radius: 10px; color: #0a0f1e;
+  font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 700;
+  letter-spacing: 0.04em; cursor: pointer; display: block;
 }
 .privacy { text-align: center; font-size: 0.73rem; color: rgba(245,244,240,0.3); margin-top: 12px; }
 
 .stats { border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
 .stat { padding: 36px 24px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.06); }
 .stat:last-child { border-bottom: none; }
-.stat-num { font-family: ‘Bebas Neue’, sans-serif; font-size: 3.2rem; color: #c9a84c; line-height: 1; display: block; }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; color: #c9a84c; line-height: 1; display: block; }
 .stat-label { font-size: 0.8rem; color: rgba(245,244,240,0.45); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 6px; }
 
 .how { padding: 70px 5vw; }
 .section-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: #c9a84c; font-weight: 500; margin-bottom: 10px; }
-.section-title { font-family: ‘Bebas Neue’, sans-serif; font-size: 2.6rem; line-height: 1; margin-bottom: 40px; }
+.section-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; line-height: 1; margin-bottom: 40px; }
 .step { background: #111827; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 28px; margin-bottom: 16px; }
 .step-icon { font-size: 1.4rem; margin-bottom: 12px; }
 .step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
 .step p { font-size: 0.88rem; color: rgba(245,244,240,0.5); line-height: 1.6; font-weight: 300; }
 
+.testi-section { padding: 0 5vw 70px; }
+.testi-card { background: #111827; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 24px; margin-bottom: 16px; }
+.stars { color: #c9a84c; font-size: 0.9rem; margin-bottom: 12px; }
+.testi-text { font-size: 0.9rem; line-height: 1.65; color: rgba(245,244,240,0.7); font-style: italic; font-weight: 300; margin-bottom: 16px; }
+.testi-author { display: flex; align-items: center; gap: 10px; }
+.avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #c9a84c, #6b3a1e); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: #0a0f1e; flex-shrink: 0; }
+.author-name { font-weight: 600; font-size: 0.85rem; }
+.author-loc { font-size: 0.75rem; color: #6b7280; }
+
 .footer-cta { padding: 70px 5vw; text-align: center; }
-.footer-cta h2 { font-family: ‘Bebas Neue’, sans-serif; font-size: 3rem; line-height: 1; margin-bottom: 16px; }
+.footer-cta h2 { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; line-height: 1; margin-bottom: 16px; }
 .footer-cta h2 .gold { color: #c9a84c; }
 .footer-cta p { font-size: 0.95rem; color: rgba(245,244,240,0.5); font-weight: 300; margin-bottom: 28px; }
-.ghost-btn { display: inline-block; padding: 13px 32px; border: 1.5px solid #c9a84c; border-radius: 10px; color: #c9a84c; font-size: 0.95rem; font-weight: 600; text-decoration: none; cursor: pointer; background: none; font-family: ‘DM Sans’, sans-serif; }
+.ghost-btn { display: inline-block; padding: 13px 32px; border: 1.5px solid #c9a84c; border-radius: 10px; color: #c9a84c; font-size: 0.95rem; font-weight: 600; text-decoration: none; cursor: pointer; background: none; font-family: 'DM Sans', sans-serif; }
 
 .footer-bar { border-top: 1px solid rgba(255,255,255,0.06); padding: 24px 5vw; text-align: center; font-size: 0.75rem; color: rgba(245,244,240,0.3); }
-.logo { font-family: ‘Bebas Neue’, sans-serif; font-size: 1.4rem; color: #f5f4f0; margin-bottom: 8px; }
+.logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: #f5f4f0; margin-bottom: 8px; }
+.logo span { color: #c9a84c; }
 
 .success-msg { display: none; text-align: center; padding: 20px 0; }
-.success-msg h3 { font-family: ‘Bebas Neue’, sans-serif; font-size: 1.8rem; color: #c9a84c; margin-bottom: 8px; }
+.success-msg h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: #c9a84c; margin-bottom: 8px; }
 .success-msg p { font-size: 0.9rem; color: rgba(245,244,240,0.5); font-weight: 300; }
+```
 
   </style>
 </head>
 <body>
 
   <section class="hero">
-    <div class="badge-wrap"><div class="badge"><span class="badge-dot"></span> Perth Home Loan Experts</div></div>
-    <h1>Find Out How Much You Can Borrow<span class="gold">in 60 Seconds</span></h1>
-    <p class="hero-sub">Get matched with a local Perth mortgage broker who compares 40+ lenders to find your best rate.</p>
+    <div class="badge-wrap"><div class="badge"><span class="badge-dot"></span> Australia's Trusted Mortgage Brokers</div></div>
+    <h1>Your Home.<span class="gold">Your Rate.</span>Your Terms.</h1>
+    <p class="hero-sub">Stop guessing what you can borrow. Get a free, no-obligation assessment from an expert broker who shops 40+ lenders to find your best deal.</p>
     <div class="trust">
       <div class="trust-item"><span class="tick">&#10003;</span> No credit check required</div>
-      <div class="trust-item"><span class="tick">&#10003;</span> Local Perth broker contacts you directly</div>
+      <div class="trust-item"><span class="tick">&#10003;</span> Response within 2 hours</div>
       <div class="trust-item"><span class="tick">&#10003;</span> 100% free service</div>
     </div>
   </section>
-
-  <p class="compare-line">Compare 40+ lenders with one simple form</p>
 
   <section class="form-wrap">
     <div class="form-card">
       <div class="success-msg" id="success-msg">
         <p style="font-size:2rem;margin-bottom:12px;">&#10003;</p>
         <h3>You're on the list!</h3>
-        <p>A local Perth broker will be in touch shortly.</p>
+        <p>A broker will be in touch within 2 business hours.</p>
       </div>
       <div id="form-inner">
         <p class="form-title">Get a Free Assessment</p>
@@ -153,7 +159,7 @@ letter-spacing: 0.04em; cursor: pointer; display: block;
           </div>
         </div>
         <button class="cta-btn" onclick="submitForm()">Get My Free Assessment &#8594;</button>
-        <p class="privacy">No obligation &bull; Takes 60 seconds</p>
+        <p class="privacy">Your details are safe. We never share your information.</p>
       </div>
     </div>
   </section>
@@ -161,26 +167,26 @@ letter-spacing: 0.04em; cursor: pointer; display: block;
   <div class="stats">
     <div class="stat"><span class="stat-num">40+</span><div class="stat-label">Lenders Compared</div></div>
     <div class="stat"><span class="stat-num">FREE</span><div class="stat-label">Service, Always</div></div>
-    <div class="stat"><span class="stat-num">LOCAL</span><div class="stat-label">Perth Brokers</div></div>
+    <div class="stat"><span class="stat-num">2HR</span><div class="stat-label">Response Time</div></div>
   </div>
 
   <section class="how">
     <p class="section-label">The Process</p>
     <h2 class="section-title">Simple. Fast. Sorted.</h2>
-    <div class="step"><div class="step-icon">&#128203;</div><h3>Tell us your situation</h3><p>Fill out the quick form above. No paperwork, no commitment - just a few details about your loan needs.</p></div>
-    <div class="step"><div class="step-icon">&#128269;</div><h3>Your broker compares 40+ lenders</h3><p>Your dedicated Perth broker searches 40+ banks and lenders to find the lowest rate that fits your situation.</p></div>
-    <div class="step"><div class="step-icon">&#127969;</div><h3>Get approved and move in</h3><p>Your Perth broker handles the paperwork, liaises with the lender, and keeps you updated every step of the way.</p></div>
+    <div class="step"><div class="step-icon">&#128203;</div><h3>Tell us your situation</h3><p>Fill out the quick form above. No paperwork, no commitment - just a few details to get started.</p></div>
+    <div class="step"><div class="step-icon">&#128269;</div><h3>We compare 40+ lenders</h3><p>Your dedicated broker searches our panel of banks and lenders to find the lowest rate that fits you.</p></div>
+    <div class="step"><div class="step-icon">&#127969;</div><h3>Get approved and move in</h3><p>We handle the paperwork, chase the bank, and keep you updated every step of the way.</p></div>
   </section>
 
   <section class="footer-cta">
     <h2>Ready to find your <span class="gold">best rate?</span></h2>
-    <p>Join Perth locals who are getting their home loans sorted.</p>
+    <p>Get your free assessment today.</p>
     <button class="ghost-btn" onclick="window.scrollTo(0,0)">Start Free Assessment</button>
   </section>
 
   <div class="footer-bar">
     <div class="logo">GetLoanSorted</div>
-    <div>&#169; 2025 GetLoanSorted. All rights reserved.</div>
+    <div>© 2025 GetLoanSorted. All rights reserved.</div>
   </div>
 
   <script>
