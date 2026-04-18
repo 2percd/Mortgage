@@ -124,7 +124,8 @@ select option { background: #1a2035; }
         <h3>You're on the list!</h3>
         <p>A local Perth broker will be in touch shortly.</p>
       </div>
-      <div id="form-inner">
+      <form id="form-inner" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="eca1882f-f8d7-4ea0-ba4f-c3e431e6cfdf">
         <p class="form-title">Get a Free Assessment</p>
         <p class="form-sub">Takes less than 60 seconds - no commitment.</p>
         <div class="two-col">
@@ -157,7 +158,7 @@ select option { background: #1a2035; }
         </div>
         <button class="cta-btn" onclick="submitForm()">Get My Free Assessment &#8594;</button>
         <p class="privacy">No obligation &bull; Takes 60 seconds</p>
-      </div>
+      </form>
     </div>
   </section>
 
