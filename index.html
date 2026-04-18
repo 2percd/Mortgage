@@ -129,14 +129,14 @@ select option { background: #1a2035; }
         <p class="form-title">Get a Free Assessment</p>
         <p class="form-sub">Takes less than 60 seconds - no commitment.</p>
         <div class="two-col">
-          <div class="field"><label>First Name</label><input type="text" placeholder="Sarah" id="fname"/></div>
-          <div class="field"><label>Last Name</label><input type="text" placeholder="Johnson" id="lname"/></div>
+          <div class="field"><label>First Name</label><input type="text" name="first_name" placeholder="Sarah" id="fname"/></div>
+          <div class="field"><label>Last Name</label><input type="text" name="last_name" placeholder="Johnson" id="lname"/></div>
         </div>
-        <div class="field"><label>Email Address</label><input type="email" placeholder="sarah@email.com" id="email"/></div>
-        <div class="field"><label>Phone Number</label><input type="tel" placeholder="0400 000 000" id="phone"/></div>
+        <div class="field"><label>Email Address</label><input type="email" name="email" placeholder="sarah@email.com" id="email"/></div>
+        <div class="field"><label>Phone Number</label><input type="tel" name="phone" placeholder="0400 000 000" id="phone"/></div>
         <div class="two-col">
           <div class="field"><label>Loan Purpose</label>
-            <select id="purpose">
+            <select id="purpose" name="loan_purpose">
               <option value="">Select...</option>
               <option>Buy first home</option>
               <option>Refinance existing loan</option>
@@ -146,7 +146,7 @@ select option { background: #1a2035; }
             </select>
           </div>
           <div class="field"><label>Loan Amount</label>
-            <select id="amount">
+            <select id="amount" name="loan_amount">
               <option value="">Select...</option>
               <option>Under $300k</option>
               <option>$300k - $500k</option>
