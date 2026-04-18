@@ -124,19 +124,18 @@ select option { background: #1a2035; }
         <h3>You're on the list!</h3>
         <p>A local Perth broker will be in touch shortly.</p>
       </div>
-      <form id="form-inner" action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="eca1882f-f8d7-4ea0-ba4f-c3e431e6cfdf">
+      <form id="form-inner" onsubmit="onSubmit(event)">
         <p class="form-title">Get a Free Assessment</p>
         <p class="form-sub">Takes less than 60 seconds - no commitment.</p>
         <div class="two-col">
-          <div class="field"><label>First Name</label><input type="text" placeholder="Sarah" id="fname"/></div>
-          <div class="field"><label>Last Name</label><input type="text" placeholder="Johnson" id="lname"/></div>
+          <div class="field"><label>First Name</label><input type="text" name="first_name" placeholder="Sarah" id="fname"/></div>
+          <div class="field"><label>Last Name</label><input type="text" name="last_name" placeholder="Johnson" id="lname"/></div>
         </div>
-        <div class="field"><label>Email Address</label><input type="email" placeholder="sarah@email.com" id="email"/></div>
-        <div class="field"><label>Phone Number</label><input type="tel" placeholder="0400 000 000" id="phone"/></div>
+        <div class="field"><label>Email Address</label><input type="email" name="email" placeholder="sarah@email.com" id="email"/></div>
+        <div class="field"><label>Phone Number</label><input type="tel" name="phone" placeholder="0400 000 000" id="phone"/></div>
         <div class="two-col">
           <div class="field"><label>Loan Purpose</label>
-            <select id="purpose">
+            <select id="purpose" name="loan_purpose">
               <option value="">Select...</option>
               <option>Buy first home</option>
               <option>Refinance existing loan</option>
@@ -146,7 +145,7 @@ select option { background: #1a2035; }
             </select>
           </div>
           <div class="field"><label>Loan Amount</label>
-            <select id="amount">
+            <select id="amount" name="loan_amount">
               <option value="">Select...</option>
               <option>Under $300k</option>
               <option>$300k - $500k</option>
@@ -156,7 +155,7 @@ select option { background: #1a2035; }
             </select>
           </div>
         </div>
-        <button class="cta-btn" onclick="submitForm()">Get My Free Assessment &#8594;</button>
+        <button type="submit" class="cta-btn">Get My Free Assessment &#8594;</button>
         <p class="privacy">No obligation &bull; Takes 60 seconds</p>
       </form>
     </div>
@@ -188,22 +187,36 @@ select option { background: #1a2035; }
   </div>
 
   <script>
-    function submitForm() {
-      var fname = document.getElementById('fname').value.trim();
-      var email = document.getElementById('email').value.trim();
-      var phone = document.getElementById('phone').value.trim();
-      if (!fname || !email || !phone) {
-        var btn = document.querySelector('.cta-btn');
+    async function onSubmit(event) {
+      event.preventDefault();
+
+      var btn = document.querySelector('.cta-btn');
+      btn.textContent = 'Sending\u2026';
+      btn.disabled = true;
+
+      const formData = new FormData(event.target);
+      formData.append("access_key", "eca1882f-f8d7-4ea0-ba4f-c3e431e6cfdf");
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        document.getElementById('form-inner').style.display = 'none';
+        document.getElementById('success-msg').style.display = 'block';
+        event.target.reset();
+      } else {
         btn.style.background = '#c04a4a';
-        btn.textContent = 'Please fill in required fields';
+        btn.textContent = 'Something went wrong. Try again.';
+        btn.disabled = false;
         setTimeout(function() {
           btn.style.background = 'linear-gradient(135deg, #c9a84c, #a87c28)';
           btn.textContent = 'Get My Free Assessment \u2192';
-        }, 2000);
-        return;
+        }, 3000);
       }
-      document.getElementById('form-inner').style.display = 'none';
-      document.getElementById('success-msg').style.display = 'block';
     }
   </script>
 
