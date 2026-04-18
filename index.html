@@ -190,8 +190,12 @@ select option { background: #1a2035; }
   <script>
     function submitForm() {
       var fname = document.getElementById('fname').value.trim();
+      var lname = document.getElementById('lname').value.trim();
       var email = document.getElementById('email').value.trim();
       var phone = document.getElementById('phone').value.trim();
+      var purpose = document.getElementById('purpose').value;
+      var amount = document.getElementById('amount').value;
+
       if (!fname || !email || !phone) {
         var btn = document.querySelector('.cta-btn');
         btn.style.background = '#c04a4a';
@@ -202,8 +206,48 @@ select option { background: #1a2035; }
         }, 2000);
         return;
       }
-      document.getElementById('form-inner').style.display = 'none';
-      document.getElementById('success-msg').style.display = 'block';
+
+      var btn = document.querySelector('.cta-btn');
+      btn.textContent = 'Sending\u2026';
+      btn.disabled = true;
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: 'eca1882f-f8d7-4ea0-ba4f-c3e431e6cfdf',
+          first_name: fname,
+          last_name: lname,
+          email: email,
+          phone: phone,
+          loan_purpose: purpose,
+          loan_amount: amount
+        })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.success) {
+          document.getElementById('form-inner').style.display = 'none';
+          document.getElementById('success-msg').style.display = 'block';
+        } else {
+          btn.style.background = '#c04a4a';
+          btn.textContent = 'Something went wrong. Try again.';
+          btn.disabled = false;
+          setTimeout(function() {
+            btn.style.background = 'linear-gradient(135deg, #c9a84c, #a87c28)';
+            btn.textContent = 'Get My Free Assessment \u2192';
+          }, 3000);
+        }
+      })
+      .catch(function() {
+        btn.style.background = '#c04a4a';
+        btn.textContent = 'Something went wrong. Try again.';
+        btn.disabled = false;
+        setTimeout(function() {
+          btn.style.background = 'linear-gradient(135deg, #c9a84c, #a87c28)';
+          btn.textContent = 'Get My Free Assessment \u2192';
+        }, 3000);
+      });
     }
   </script>
 
