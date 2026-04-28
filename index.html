@@ -222,6 +222,7 @@ select option { background: #1a2035; }
       const data = await response.json();
 
       if (data.success) {
+        fbq('track', 'Lead');
         document.getElementById('form-inner').style.display = 'none';
         document.getElementById('success-msg').style.display = 'block';
         event.target.reset();
