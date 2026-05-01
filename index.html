@@ -116,6 +116,7 @@ select option { background: #1a2035; }
 .success-msg { display: none; text-align: center; padding: 20px 0; }
 .success-msg h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: #c9a84c; margin-bottom: 8px; }
 .success-msg p { font-size: 0.9rem; color: rgba(245,244,240,0.5); font-weight: 300; }
+.field-error { display: block; color: #e05c5c; font-size: 0.72rem; margin-top: 5px; }
 
   </style>
 </head>
@@ -145,14 +146,14 @@ select option { background: #1a2035; }
         <p class="form-title">Get a Free Assessment</p>
         <p class="form-sub">Takes less than 60 seconds. No commitment, ever.</p>
         <div class="two-col">
-          <div class="field"><label>First Name</label><input type="text" name="first_name" placeholder="Sarah" id="fname"/></div>
-          <div class="field"><label>Last Name</label><input type="text" name="last_name" placeholder="Johnson" id="lname"/></div>
+          <div class="field"><label>First Name</label><input type="text" name="first_name" placeholder="Sarah" id="fname" required/></div>
+          <div class="field"><label>Last Name</label><input type="text" name="last_name" placeholder="Johnson" id="lname" required/></div>
         </div>
-        <div class="field"><label>Email Address</label><input type="email" name="email" placeholder="sarah@email.com" id="email"/></div>
-        <div class="field"><label>Phone Number</label><input type="tel" name="phone" placeholder="0400 000 000" id="phone"/></div>
+        <div class="field"><label>Email Address</label><input type="email" name="email" placeholder="sarah@email.com" id="email" required/></div>
+        <div class="field"><label>Phone Number</label><input type="tel" name="phone" placeholder="0400 000 000" id="phone" required/></div>
         <div class="two-col">
           <div class="field"><label>Loan Purpose</label>
-            <select id="purpose" name="loan_purpose">
+            <select id="purpose" name="loan_purpose" required>
               <option value="">Select...</option>
               <option>Buy first home</option>
               <option>Refinance existing loan</option>
@@ -162,7 +163,7 @@ select option { background: #1a2035; }
             </select>
           </div>
           <div class="field"><label>Loan Amount</label>
-            <select id="amount" name="loan_amount">
+            <select id="amount" name="loan_amount" required>
               <option value="">Select...</option>
               <option>Under $300k</option>
               <option>$300k - $500k</option>
@@ -204,8 +205,37 @@ select option { background: #1a2035; }
   </div>
 
   <script>
+    function showError(el, msg) {
+      var err = document.createElement('span');
+      err.className = 'field-error';
+      err.textContent = msg;
+      el.parentNode.appendChild(err);
+      el.addEventListener('input', function() { err.remove(); }, { once: true });
+      el.addEventListener('change', function() { err.remove(); }, { once: true });
+    }
+
     async function onSubmit(event) {
       event.preventDefault();
+
+      document.querySelectorAll('.field-error').forEach(function(el) { el.remove(); });
+
+      var fields = [
+        document.getElementById('fname'),
+        document.getElementById('lname'),
+        document.getElementById('email'),
+        document.getElementById('phone'),
+        document.getElementById('purpose'),
+        document.getElementById('amount')
+      ];
+
+      var hasError = false;
+      fields.forEach(function(el) {
+        if (!el.value.trim()) {
+          showError(el, 'This field is required.');
+          hasError = true;
+        }
+      });
+      if (hasError) return;
 
       var btn = document.querySelector('.cta-btn');
       btn.textContent = 'Sending\u2026';
