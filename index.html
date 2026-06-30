@@ -117,6 +117,7 @@ select option { background: #1a2035; }
 .success-msg h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: #c9a84c; margin-bottom: 8px; }
 .success-msg p { font-size: 0.9rem; color: rgba(245,244,240,0.5); font-weight: 300; }
 .field-error { display: block; color: #e05c5c; font-size: 0.72rem; margin-top: 5px; }
+.form-trust { text-align: center; font-size: 0.73rem; color: rgba(245,244,240,0.4); margin-bottom: 10px; }
 
   </style>
 </head>
@@ -125,7 +126,7 @@ select option { background: #1a2035; }
   <section class="hero">
     <div class="badge-wrap"><div class="badge"><span class="badge-dot"></span> Helping Perth Locals Find the Right Home Loan</div></div>
     <h1>Find Out How Much You Can Borrow<span class="gold">in 60 Seconds</span></h1>
-    <p class="hero-sub">Get matched with a local Perth mortgage broker who compares 40+ lenders to find your best rate.</p>
+    <p class="hero-sub">Get matched with a local Perth mortgage broker who compares multiple lenders to find your best rate.</p>
     <div class="trust">
       <div class="trust-item"><span class="tick">&#10003;</span> No credit check required</div>
       <div class="trust-item"><span class="tick">&#10003;</span> Local Perth broker contacts you directly</div>
@@ -133,7 +134,7 @@ select option { background: #1a2035; }
     </div>
   </section>
 
-  <p class="compare-line">Compare 40+ lenders with one simple form</p>
+  <p class="compare-line">Compare multiple lenders with one simple form</p>
 
   <section class="form-wrap">
     <div class="form-card">
@@ -151,6 +152,15 @@ select option { background: #1a2035; }
         </div>
         <div class="field"><label>Email Address</label><input type="email" name="email" placeholder="sarah@email.com" id="email" required/></div>
         <div class="field"><label>Phone Number</label><input type="tel" name="phone" placeholder="0400 000 000" id="phone" required/></div>
+        <div class="field"><label>Best Time to Contact</label>
+          <select id="contactTime" name="best_time_to_contact" required>
+            <option value="">Select...</option>
+            <option>Morning (9am-12pm)</option>
+            <option>Afternoon (12pm-5pm)</option>
+            <option>Evening (5pm-7pm)</option>
+            <option>Anytime</option>
+          </select>
+        </div>
         <div class="two-col">
           <div class="field"><label>Loan Purpose</label>
             <select id="purpose" name="loan_purpose" required>
@@ -173,6 +183,7 @@ select option { background: #1a2035; }
             </select>
           </div>
         </div>
+        <p class="form-trust">Your details go directly to a licensed Perth mortgage broker, never sold or shared.</p>
         <button type="submit" class="cta-btn">Get My Free Assessment &#8594;</button>
         <p class="privacy">No obligation &bull; Takes 60 seconds</p>
       </form>
@@ -180,7 +191,7 @@ select option { background: #1a2035; }
   </section>
 
   <div class="stats">
-    <div class="stat"><span class="stat-num">40+</span><div class="stat-label">Lenders Compared</div></div>
+    <div class="stat"><span class="stat-num">Multiple</span><div class="stat-label">Lenders Compared</div></div>
     <div class="stat"><span class="stat-num">FREE</span><div class="stat-label">Service, Always</div></div>
     <div class="stat"><span class="stat-num">LOCAL</span><div class="stat-label">Perth Brokers</div></div>
   </div>
@@ -189,7 +200,7 @@ select option { background: #1a2035; }
     <p class="section-label">The Process</p>
     <h2 class="section-title">Simple. Fast. Sorted.</h2>
     <div class="step"><div class="step-icon">&#128203;</div><h3>Tell us your situation</h3><p>Fill out the quick form above. Just a few details about your loan needs, no paperwork required.</p></div>
-    <div class="step"><div class="step-icon">&#128269;</div><h3>Your broker compares 40+ lenders</h3><p>Your dedicated Perth broker searches 40+ banks and lenders to find the lowest rate that fits your situation.</p></div>
+    <div class="step"><div class="step-icon">&#128269;</div><h3>Your broker compares multiple lenders</h3><p>Your dedicated Perth broker searches multiple banks and lenders to find the lowest rate that fits your situation.</p></div>
     <div class="step"><div class="step-icon">&#127969;</div><h3>Get approved and move in</h3><p>Your Perth broker handles the paperwork, liaises with the lender, and keeps you updated every step of the way.</p></div>
   </section>
 
@@ -224,6 +235,7 @@ select option { background: #1a2035; }
         document.getElementById('lname'),
         document.getElementById('email'),
         document.getElementById('phone'),
+        document.getElementById('contactTime'),
         document.getElementById('purpose'),
         document.getElementById('amount')
       ];
@@ -235,6 +247,24 @@ select option { background: #1a2035; }
           hasError = true;
         }
       });
+
+      var emailEl = document.getElementById('email');
+      var emailVal = emailEl.value.trim();
+      if (emailVal && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+        showError(emailEl, 'Please enter a valid email address.');
+        hasError = true;
+      }
+
+      var phoneEl = document.getElementById('phone');
+      var phoneVal = phoneEl.value.trim();
+      if (phoneVal) {
+        var digitCount = (phoneVal.match(/\d/g) || []).length;
+        if (!/^[\d\s+-]+$/.test(phoneVal) || digitCount < 8) {
+          showError(phoneEl, 'Please enter a valid phone number.');
+          hasError = true;
+        }
+      }
+
       if (hasError) return;
 
       var btn = document.querySelector('.cta-btn');
