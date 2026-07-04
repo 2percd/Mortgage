@@ -284,6 +284,21 @@ select option { background: #1a2035; }
 
       if (data.success) {
         fbq('track', 'Lead');
+
+        fetch('https://hooks.zapier.com/hooks/catch/28145618/4u2p7ee/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            first_name: document.getElementById('fname').value.trim(),
+            last_name: document.getElementById('lname').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            phone: document.getElementById('phone').value.trim(),
+            best_time_to_contact: document.getElementById('contactTime').value,
+            loan_purpose: document.getElementById('purpose').value,
+            loan_amount: document.getElementById('amount').value
+          })
+        }).catch(function() {});
+
         document.getElementById('form-inner').style.display = 'none';
         document.getElementById('success-msg').style.display = 'block';
         event.target.reset();
