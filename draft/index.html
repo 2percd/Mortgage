@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Loan Sorted — Funnel Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EFEAE0;
+    --card: #FBF8F2;
+    --ink: #21201C;
+    --muted: #6B6558;
+    --brick: #A8492B;
+    --brick-light: #C97A54;
+    --sold: #5B7A5E;
+    --line: #DED6C6;
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 85% 92%, rgba(168,73,43,0.08), transparent 40%);
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 32px 16px 60px;
+  }
+
+  .preview-tag {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    text-align: center;
+    background: var(--ink);
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    padding: 7px 12px;
+    z-index: 10;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 440px;
+    margin-top: 28px;
+  }
+
+  .brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .brand-mark svg { width: 18px; height: 18px; }
+
+  .brand-name {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px 22px 22px;
+    box-shadow: 0 1px 2px rgba(33,32,28,0.04), 0 8px 24px rgba(33,32,28,0.06);
+  }
+
+  .progress-row {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+  .progress-seg {
+    height: 4px;
+    flex: 1;
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-seg i {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: var(--brick);
+    transition: width 0.4s ease;
+  }
+  .progress-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 22px;
+    font-weight: 500;
+  }
+
+  .step { display: none; }
+  .step.active { display: block; animation: rise 0.35s ease; }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .step h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .step .sub {
+    font-family: 'Inter', sans-serif;
+    color: var(--muted);
+    font-size: 14.5px;
+    margin: 0 0 20px;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .opt {
+    border: 1.5px solid var(--line);
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px 15px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .opt:hover { border-color: var(--brick); }
+  .opt.selected {
+    border-color: var(--brick);
+    background: #FBF0EA;
+  }
+  .opt .check {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid var(--line);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .opt.selected .check { border-color: var(--brick); background: var(--brick); }
+  .opt.selected .check::after {
+    content: '';
+    position: absolute;
+    top: 4px; left: 4px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  .gate-note {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    background: #F3EEE3;
+    border-left: 3px solid var(--brick);
+    padding: 10px 12px;
+    border-radius: 6px;
+    display: none;
+  }
+  .gate-note.show { display: block; }
+
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .field input, .field select {
+    width: 100%;
+    border: 1.5px solid var(--line);
+    border-radius: 9px;
+    padding: 12px 13px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    background: #fff;
+    color: var(--ink);
+  }
+  .field select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6558' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 13px center; }
+  .field select:invalid { color: var(--muted); }
+  .field input:focus, .field select:focus { outline: 2px solid var(--brick); outline-offset: 1px; border-color: var(--brick); }
+
+  .reassure {
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin: 16px 0 4px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+  }
+
+  .nav {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .btn {
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 14.5px;
+    border-radius: 9px;
+    padding: 13px 18px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-back {
+    background: transparent;
+    color: var(--muted);
+    border: 1.5px solid var(--line);
+  }
+  .btn-primary {
+    background: var(--brick);
+    color: #fff;
+    flex: 1;
+  }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-primary:not(:disabled):hover { background: var(--brick-light); }
+
+  .step-final .btn-primary { width: 100%; }
+
+  .done {
+    text-align: center;
+    padding: 8px 0 4px;
+  }
+  .done .sold-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: #EAF0EA;
+    color: var(--sold);
+    margin-bottom: 14px;
+    font-size: 26px;
+  }
+  .done h2 { font-family: 'Sora', sans-serif; font-size: 20px; margin: 0 0 8px; }
+  .done p { color: var(--muted); font-size: 14.5px; line-height: 1.5; margin: 0; }
+
+  .note-banner {
+    max-width: 440px;
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-tag">PROTOTYPE — for internal review only, not connected to lead intake</div>
+
+<div class="wrap">
+
+  <div class="brand-row">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 11L12 4L21 11" stroke="#F4EFE6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M5 10V19C5 19.5523 5.44772 20 6 20H18C18.5523 20 19 19.5523 19 19V10" stroke="#F4EFE6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="brand-name">Get Loan Sorted</div>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <div class="progress-row" id="progressRow"></div>
+    <div class="progress-label" id="progressLabel">Step 1 of 6</div>
+
+    <!-- Step 1: Intent -->
+    <div class="step active" data-step="1">
+      <h2>What are you looking to do?</h2>
+      <p class="sub">Takes about a minute. No email needed yet.</p>
+      <div class="options" data-field="intent">
+        <button class="opt" data-value="First home">Buy my first home<span class="check"></span></button>
+        <button class="opt" data-value="Next home">Buy my next home<span class="check"></span></button>
+        <button class="opt" data-value="Refinance">Refinance my current loan<span class="check"></span></button>
+        <button class="opt" data-value="Investment">Buy an investment property<span class="check"></span></button>
+      </div>
+    </div>
+
+    <!-- Step 2: Timing -->
+    <div class="step" data-step="2">
+      <h2>When are you looking to buy?</h2>
+      <p class="sub">Helps us match the right broker's availability.</p>
+      <div class="options" data-field="timing">
+        <button class="opt" data-value="0-30 days">0–30 days<span class="check"></span></button>
+        <button class="opt" data-value="1-3 months">1–3 months<span class="check"></span></button>
+        <button class="opt" data-value="3-6 months">3–6 months<span class="check"></span></button>
+        <button class="opt" data-value="Just researching">Just researching for now<span class="check"></span></button>
+      </div>
+    </div>
+
+    <!-- Step 3: Property value -->
+    <div class="step" data-step="3">
+      <h2>What's your rough price range?</h2>
+      <p class="sub">A ballpark is fine — nothing's locked in.</p>
+      <div class="options" data-field="value">
+        <button class="opt" data-value="Under $400k">Under $400,000<span class="check"></span></button>
+        <button class="opt" data-value="$400k-$600k">$400,000 – $600,000<span class="check"></span></button>
+        <button class="opt" data-value="$600k-$800k">$600,000 – $800,000<span class="check"></span></button>
+        <button class="opt" data-value="$800k+">$800,000+<span class="check"></span></button>
+      </div>
+    </div>
+
+    <!-- Step 4: Deposit (gate) -->
+    <div class="step" data-step="4">
+      <h2>How much deposit have you saved?</h2>
+      <p class="sub">This is the number brokers ask for first.</p>
+      <div class="options" data-field="deposit">
+        <button class="opt" data-value="Under $20k">Under $20,000<span class="check"></span></button>
+        <button class="opt" data-value="$20k-$50k">$20,000 – $50,000<span class="check"></span></button>
+        <button class="opt" data-value="$50k-$100k">$50,000 – $100,000<span class="check"></span></button>
+        <button class="opt" data-value="$100k+">$100,000+<span class="check"></span></button>
+      </div>
+      <div class="gate-note" id="gateNote">That's tight against most lenders' minimums right now — a broker can still take a look at your options, so continue if you'd like a read on where you stand.</div>
+    </div>
+
+    <!-- Step 5: Employment -->
+    <div class="step" data-step="5">
+      <h2>What's your employment type?</h2>
+      <p class="sub">Affects which lenders can help.</p>
+      <div class="options" data-field="employment">
+        <button class="opt" data-value="Full-time">Full-time<span class="check"></span></button>
+        <button class="opt" data-value="Part-time">Part-time<span class="check"></span></button>
+        <button class="opt" data-value="Casual">Casual<span class="check"></span></button>
+        <button class="opt" data-value="Self-employed">Self-employed / own my business<span class="check"></span></button>
+      </div>
+    </div>
+
+    <!-- Step 6: Contact -->
+    <div class="step step-final" data-step="6">
+      <h2>Where should your broker send this?</h2>
+      <p class="sub">Last step — one WA broker will be in touch.</p>
+      <div class="field">
+        <label for="fName">Full name</label>
+        <input type="text" id="fName" placeholder="Jordan Smith">
+      </div>
+      <div class="field">
+        <label for="fEmail">Email</label>
+        <input type="email" id="fEmail" placeholder="jordan@email.com">
+      </div>
+      <div class="field">
+        <label for="fPhone">Mobile</label>
+        <input type="tel" id="fPhone" placeholder="04XX XXX XXX">
+      </div>
+      <div class="field">
+        <label for="fTime">Best time to contact</label>
+        <select id="fTime">
+          <option value="">Select…</option>
+          <option value="Morning">Morning (9am–12pm)</option>
+          <option value="Afternoon">Afternoon (12pm–5pm)</option>
+          <option value="Evening">Evening (5pm–7pm)</option>
+          <option value="Anytime">Anytime</option>
+        </select>
+      </div>
+      <p class="reassure">Free — brokers are paid by the lender, not you. By submitting this form, you agree to share your contact details and loan information with a licensed Perth mortgage broker, who will use them to contact you about home loan options. No obligation to proceed.</p>
+      <button class="btn btn-primary" id="submitBtn" disabled onclick="submitForm()">Get my quote</button>
+    </div>
+
+    <!-- Done state -->
+    <div class="step" data-step="done">
+      <div class="done">
+        <div class="sold-badge">✓</div>
+        <h2>Sent to your broker</h2>
+        <p>A WA-based broker will call you at the time that suits, usually within a business day.</p>
+      </div>
+    </div>
+
+    <div class="nav" id="navRow">
+      <button class="btn btn-back" id="backBtn" onclick="goBack()">Back</button>
+      <button class="btn btn-primary" id="nextBtn" disabled onclick="goNext()">Continue</button>
+    </div>
+
+  </div>
+
+  <div class="note-banner">
+    <strong>Internal note:</strong> deposit gate currently shows a soft warning, not a hard block, on the lowest band. Flip <code>HARD_GATE</code> to <code>true</code> in the script below if you want it to stop unqualified leads there instead.
+  </div>
+
+</div>
+
+<script>
+  const HARD_GATE = false; // set true to block "Under $20k" instead of soft-warning
+
+  const steps = ['1','2','3','4','5','6'];
+  let current = 0;
+  const answers = {};
+
+  const progressRow = document.getElementById('progressRow');
+  steps.forEach(() => {
+    const seg = document.createElement('div');
+    seg.className = 'progress-seg';
+    seg.innerHTML = '<i></i>';
+    progressRow.appendChild(seg);
+  });
+  const segs = progressRow.querySelectorAll('.progress-seg i');
+
+  function renderProgress() {
+    segs.forEach((s, i) => { s.style.width = i <= current ? '100%' : '0%'; });
+    document.getElementById('progressLabel').textContent = current < steps.length
+      ? `Step ${current + 1} of ${steps.length}`
+      : 'All done';
+  }
+
+  document.querySelectorAll('.opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const group = opt.closest('.options');
+      group.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      const field = group.dataset.field;
+      answers[field] = opt.dataset.value;
+      document.getElementById('nextBtn').disabled = false;
+
+      if (field === 'deposit') {
+        const note = document.getElementById('gateNote');
+        if (opt.dataset.value === 'Under $20k') {
+          if (HARD_GATE) {
+            note.textContent = "Most lenders need more than this to proceed — we can't pass this one through right now.";
+            note.classList.add('show');
+            document.getElementById('nextBtn').disabled = true;
+          } else {
+            note.classList.add('show');
+          }
+        } else {
+          note.classList.remove('show');
+        }
+      }
+    });
+  });
+
+  function showStep(i) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    const target = document.querySelector(`.step[data-step="${steps[i] ?? 'done'}"]`);
+    target.classList.add('active');
+
+    document.getElementById('backBtn').style.visibility = i === 0 ? 'hidden' : 'visible';
+
+    const nextBtn = document.getElementById('nextBtn');
+    const navRow = document.getElementById('navRow');
+    if (i >= steps.length) {
+      navRow.style.display = 'none';
+    } else {
+      navRow.style.display = 'flex';
+      nextBtn.style.display = (i === steps.length - 1) ? 'none' : 'block';
+      const field = steps[i] === '1' ? 'intent' : steps[i] === '2' ? 'timing' : steps[i] === '3' ? 'value' : steps[i] === '4' ? 'deposit' : 'employment';
+      nextBtn.disabled = !answers[field];
+    }
+    renderProgress();
+  }
+
+  function goNext() {
+    if (current < steps.length - 1) {
+      current++;
+      showStep(current);
+    }
+  }
+  function goBack() {
+    if (current > 0) {
+      current--;
+      showStep(current);
+    }
+  }
+
+  ['fName','fEmail','fPhone'].forEach(id => {
+    document.getElementById(id).addEventListener('input', checkContactValid);
+  });
+  document.getElementById('fTime').addEventListener('change', checkContactValid);
+  function checkContactValid() {
+    const n = document.getElementById('fName').value.trim();
+    const e = document.getElementById('fEmail').value.trim();
+    const p = document.getElementById('fPhone').value.trim();
+    const t = document.getElementById('fTime').value;
+    document.getElementById('submitBtn').disabled = !(n && e.includes('@') && p.length >= 8 && t);
+  }
+
+  function submitForm() {
+    current = steps.length;
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.querySelector('.step[data-step="done"]').classList.add('active');
+    document.getElementById('navRow').style.display = 'none';
+    renderProgress();
+  }
+
+  showStep(0);
+</script>
+
+</body>
+</html>
