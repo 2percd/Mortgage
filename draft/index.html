@@ -8,14 +8,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #EFEAE0;
-    --card: #FBF8F2;
-    --ink: #21201C;
-    --muted: #6B6558;
-    --brick: #A8492B;
-    --brick-light: #C97A54;
+    --bg: #0A0F1E;
+    --card: #111827;
+    --text: #F5F4F0;
+    --muted: rgba(245,244,240,0.55);
+    --placeholder: rgba(245,244,240,0.45);
+    --gold: #C9A84C;
+    --gold-dark: #A87C28;
+    --gold-text: #0A0F1E;
     --sold: #5B7A5E;
-    --line: #DED6C6;
+    --line: rgba(255,255,255,0.12);
     --radius: 14px;
   }
 
@@ -25,9 +27,9 @@
     margin: 0;
     background: var(--bg);
     background-image:
-      radial-gradient(circle at 85% 92%, rgba(168,73,43,0.08), transparent 40%);
+      radial-gradient(circle at 85% 92%, rgba(201,168,76,0.08), transparent 40%);
     font-family: 'Inter', sans-serif;
-    color: var(--ink);
+    color: var(--text);
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -38,8 +40,8 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     text-align: center;
-    background: var(--ink);
-    color: #fff;
+    background: var(--card);
+    color: var(--text);
     font-size: 12px;
     letter-spacing: 0.04em;
     padding: 7px 12px;
@@ -69,7 +71,7 @@
   .brand-mark {
     width: 34px; height: 34px;
     border-radius: 50%;
-    background: var(--ink);
+    background: var(--gold);
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
@@ -87,7 +89,7 @@
     border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 26px 22px 22px;
-    box-shadow: 0 1px 2px rgba(33,32,28,0.04), 0 8px 24px rgba(33,32,28,0.06);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
   }
 
   .progress-row {
@@ -106,7 +108,7 @@
     display: block;
     height: 100%;
     width: 0%;
-    background: var(--brick);
+    background: var(--gold);
     transition: width 0.4s ease;
   }
   .progress-label {
@@ -142,7 +144,7 @@
   }
   .opt {
     border: 1.5px solid var(--line);
-    background: #fff;
+    background: rgba(255,255,255,0.03);
     border-radius: 10px;
     padding: 14px 15px;
     font-family: 'Inter', sans-serif;
@@ -155,10 +157,10 @@
     align-items: center;
     justify-content: space-between;
   }
-  .opt:hover { border-color: var(--brick); }
+  .opt:hover { border-color: var(--gold); }
   .opt.selected {
-    border-color: var(--brick);
-    background: #FBF0EA;
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
   }
   .opt .check {
     width: 18px; height: 18px;
@@ -167,7 +169,7 @@
     flex-shrink: 0;
     position: relative;
   }
-  .opt.selected .check { border-color: var(--brick); background: var(--brick); }
+  .opt.selected .check { border-color: var(--gold); background: var(--gold); }
   .opt.selected .check::after {
     content: '';
     position: absolute;
@@ -181,8 +183,8 @@
     margin-top: 12px;
     font-size: 13px;
     color: var(--muted);
-    background: #F3EEE3;
-    border-left: 3px solid var(--brick);
+    background: rgba(201,168,76,0.08);
+    border-left: 3px solid var(--gold);
     padding: 10px 12px;
     border-radius: 6px;
     display: none;
@@ -206,12 +208,14 @@
     padding: 12px 13px;
     font-family: 'Inter', sans-serif;
     font-size: 15px;
-    background: #fff;
-    color: var(--ink);
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
   }
-  .field select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6558' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 13px center; }
-  .field select:invalid { color: var(--muted); }
-  .field input:focus, .field select:focus { outline: 2px solid var(--brick); outline-offset: 1px; border-color: var(--brick); }
+  .field input::placeholder { color: var(--placeholder); }
+  .field select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23AEB4BF' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 13px center; }
+  .field select:invalid { color: var(--placeholder); }
+  select option { background: #1A2035; color: var(--text); }
+  .field input:focus, .field select:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: var(--gold); }
 
   .reassure {
     font-family: 'Inter', sans-serif;
@@ -245,12 +249,12 @@
     border: 1.5px solid var(--line);
   }
   .btn-primary {
-    background: var(--brick);
-    color: #fff;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--gold-text);
     flex: 1;
   }
   .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
-  .btn-primary:not(:disabled):hover { background: var(--brick-light); }
+  .btn-primary:not(:disabled):hover { background: var(--gold); }
 
   .step-final .btn-primary { width: 100%; }
 
@@ -275,7 +279,7 @@
   .note-banner {
     max-width: 440px;
     width: 100%;
-    background: #fff;
+    background: rgba(255,255,255,0.03);
     border: 1px solid var(--line);
     border-radius: 10px;
     padding: 12px 14px;
@@ -296,8 +300,8 @@
     <div class="brand">
       <div class="brand-mark">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 11L12 4L21 11" stroke="#F4EFE6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M5 10V19C5 19.5523 5.44772 20 6 20H18C18.5523 20 19 19.5523 19 19V10" stroke="#F4EFE6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3 11L12 4L21 11" stroke="#0A0F1E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M5 10V19C5 19.5523 5.44772 20 6 20H18C18.5523 20 19 19.5523 19 19V10" stroke="#0A0F1E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
       <div class="brand-name">Get Loan Sorted</div>
