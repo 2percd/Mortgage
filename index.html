@@ -270,7 +270,7 @@ select option { background: #1a2035; }
       var phoneVal = phoneEl.value.trim();
       if (phoneVal) {
         var digitCount = (phoneVal.match(/\d/g) || []).length;
-        if (!/^[\d\s+-]+$/.test(phoneVal) || digitCount < 8) {
+        if (!/^[\d\s+-]+$/.test(phoneVal) || digitCount < 10) {
           showError(phoneEl, 'Please enter a valid phone number.');
           hasError = true;
         }
