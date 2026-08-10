@@ -95,21 +95,30 @@
     color: var(--text);
     margin: 0 0 14px;
   }
+  .draft-header h1 .gold-accent { color: var(--gold); }
+  .draft-header p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--muted);
+    margin: 0 0 18px;
+  }
   .trust {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
-    gap: 8px 16px;
+    gap: 10px;
   }
-  @media (max-width: 480px) {
-    .trust { flex-direction: column; align-items: center; gap: 8px; }
+  @media (max-width: 340px) {
+    .trust { flex-direction: column; align-items: center; flex-wrap: wrap; gap: 8px; }
   }
   .trust-item {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.78rem;
+    gap: 4px;
+    font-size: 0.7rem;
     color: var(--muted);
+    white-space: nowrap;
   }
   .tick { color: var(--gold); font-weight: 700; }
 
@@ -345,10 +354,11 @@
   </div>
 
   <div class="draft-header">
-    <h1>Still Paying $700 a Week in Rent?</h1>
+    <h1>Still Paying <span class="gold-accent">$700</span> a Week in Rent?</h1>
+    <p>That's over $36,000 a year. A local Perth broker can show you what it would take to make that payment your own, free, no obligation.</p>
     <div class="trust">
       <div class="trust-item"><span class="tick">&#10003;</span> No obligation</div>
-      <div class="trust-item"><span class="tick">&#10003;</span> Local Perth broker contacts you directly</div>
+      <div class="trust-item"><span class="tick">&#10003;</span> Local Perth broker calls you</div>
       <div class="trust-item"><span class="tick">&#10003;</span> 100% free service</div>
     </div>
   </div>
