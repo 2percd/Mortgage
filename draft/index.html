@@ -355,7 +355,7 @@
 
   <div class="draft-header">
     <h1>Still Paying <span class="gold-accent">$700</span> a Week in Rent?</h1>
-    <p>That's over $36,000 a year. See what it takes to make it yours instead.</p>
+    <p>That's over $36,000 a year, gone. See what it takes to own instead of rent.</p>
     <div class="trust">
       <div class="trust-item"><span class="tick">&#10003;</span> No obligation</div>
       <div class="trust-item"><span class="tick">&#10003;</span> Local Perth broker calls you</div>
@@ -572,7 +572,7 @@
     const e = document.getElementById('fEmail').value.trim();
     const p = document.getElementById('fPhone').value.trim();
     const t = document.getElementById('fTime').value;
-    document.getElementById('submitBtn').disabled = !(n && e.includes('@') && p.length >= 8 && t);
+    document.getElementById('submitBtn').disabled = !(n && e.includes('@') && p.length >= 10 && t);
   }
 
   async function submitForm() {
