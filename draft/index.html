@@ -575,12 +575,55 @@
     document.getElementById('submitBtn').disabled = !(n && e.includes('@') && p.length >= 8 && t);
   }
 
-  function submitForm() {
-    current = steps.length;
-    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-    document.querySelector('.step[data-step="done"]').classList.add('active');
-    document.getElementById('navRow').style.display = 'none';
-    renderProgress();
+  async function submitForm() {
+    const btn = document.getElementById('submitBtn');
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    const formData = new FormData();
+    formData.append('access_key', 'eca1882f-f8d7-4ea0-ba4f-c3e431e6cfdf');
+    formData.append('subject', 'DRAFT SUBMISSION - GetLoanSorted Test Lead (Not a Real Lead)');
+    formData.append('lead_type', 'DRAFT TEST SUBMISSION - NOT A REAL LEAD');
+    formData.append('name', document.getElementById('fName').value.trim());
+    formData.append('email', document.getElementById('fEmail').value.trim());
+    formData.append('phone', document.getElementById('fPhone').value.trim());
+    formData.append('best_time_to_contact', document.getElementById('fTime').value);
+    formData.append('intent', answers.intent || '');
+    formData.append('timing', answers.timing || '');
+    formData.append('price_range', answers.value || '');
+    formData.append('deposit_band', answers.deposit || '');
+    formData.append('employment_type', answers.employment || '');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+      const data = await response.json();
+
+      if (data.success) {
+        current = steps.length;
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.querySelector('.step[data-step="done"]').classList.add('active');
+        document.getElementById('navRow').style.display = 'none';
+        renderProgress();
+      } else {
+        showSubmitError(btn, originalText);
+      }
+    } catch (err) {
+      showSubmitError(btn, originalText);
+    }
+  }
+
+  function showSubmitError(btn, originalText) {
+    btn.style.background = '#c04a4a';
+    btn.textContent = 'Something went wrong. Try again.';
+    btn.disabled = false;
+    setTimeout(() => {
+      btn.style.background = '';
+      btn.textContent = originalText;
+    }, 3000);
   }
 
   showStep(0);
