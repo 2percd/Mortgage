@@ -349,6 +349,11 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
   <div class="draft-header">
     <h1>Still Paying <span class="gold-accent">$700</span> a Week in Rent?</h1>
     <p>That's over $36,000 a year, gone. See what it takes to own instead of rent.</p>
+    <div class="trust" id="headerTrust">
+      <div class="trust-item"><span class="tick">&#10003;</span> No obligation</div>
+      <div class="trust-item"><span class="tick">&#10003;</span> Local Perth broker calls you</div>
+      <div class="trust-item"><span class="tick">&#10003;</span> 100% free service</div>
+    </div>
   </div>
 
   <div class="card">
@@ -360,11 +365,6 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
     <div class="step active" data-step="1">
       <h2>What are you looking to do?</h2>
       <p class="sub">Takes about a minute. No email needed yet.</p>
-      <div class="trust">
-        <div class="trust-item"><span class="tick">&#10003;</span> No obligation</div>
-        <div class="trust-item"><span class="tick">&#10003;</span> Local Perth broker calls you</div>
-        <div class="trust-item"><span class="tick">&#10003;</span> 100% free service</div>
-      </div>
       <div class="options" data-field="intent">
         <button class="opt" data-value="First home">Buy my first home<span class="check"></span></button>
         <button class="opt" data-value="Next home">Buy my next home<span class="check"></span></button>
@@ -426,11 +426,6 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
     <div class="step step-final" data-step="6">
       <h2>Where should your broker send this?</h2>
       <p class="sub">Last step, a local Perth broker will call you.</p>
-      <div class="trust">
-        <div class="trust-item"><span class="tick">&#10003;</span> No obligation</div>
-        <div class="trust-item"><span class="tick">&#10003;</span> Local Perth broker calls you</div>
-        <div class="trust-item"><span class="tick">&#10003;</span> 100% free service</div>
-      </div>
       <div class="field">
         <label for="fName">Full name</label>
         <input type="text" id="fName" placeholder="Jordan Smith">
@@ -528,6 +523,8 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
     const target = document.querySelector(`.step[data-step="${steps[i] ?? 'done'}"]`);
     target.classList.add('active');
+
+    document.getElementById('headerTrust').style.display = (steps[i] === '1' || steps[i] === '6') ? 'flex' : 'none';
 
     document.getElementById('backBtn').style.visibility = i === 0 ? 'hidden' : 'visible';
 
