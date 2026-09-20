@@ -187,6 +187,9 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
     flex-direction: column;
     gap: 9px;
   }
+  .step .q-block {
+    margin-top: 28px;
+  }
   .opt {
     border: 1.5px solid var(--line);
     background: rgba(255,255,255,0.03);
@@ -410,15 +413,25 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
       <div class="gate-note" id="gateNote">That's tight against most lenders' minimums right now, but a broker can still take a look at your options. Continue if you'd like a read on where you stand.</div>
     </div>
 
-    <!-- Step 5: Employment -->
+    <!-- Step 5: Income & Employment -->
     <div class="step" data-step="5">
-      <h2>What's your employment type?</h2>
-      <p class="sub">Affects which lenders can help.</p>
-      <div class="options" data-field="employment">
-        <button class="opt" data-value="Full-time">Full-time<span class="check"></span></button>
-        <button class="opt" data-value="Part-time">Part-time<span class="check"></span></button>
-        <button class="opt" data-value="Casual">Casual<span class="check"></span></button>
-        <button class="opt" data-value="Self-employed">Self-employed / own my business<span class="check"></span></button>
+      <h2>What's your household income?</h2>
+      <p class="sub">Helps match you with lenders who suit your situation.</p>
+      <div class="options" data-field="income">
+        <button class="opt" data-value="Under $60k">Under $60,000<span class="check"></span></button>
+        <button class="opt" data-value="$60k-$100k">$60,000 – $100,000<span class="check"></span></button>
+        <button class="opt" data-value="$100k-$150k">$100,000 – $150,000<span class="check"></span></button>
+        <button class="opt" data-value="$150k+">$150,000+<span class="check"></span></button>
+      </div>
+      <div class="q-block">
+        <h2>What's your employment type?</h2>
+        <p class="sub">Affects which lenders can help.</p>
+        <div class="options" data-field="employment">
+          <button class="opt" data-value="Full-time">Full-time<span class="check"></span></button>
+          <button class="opt" data-value="Part-time">Part-time<span class="check"></span></button>
+          <button class="opt" data-value="Casual">Casual<span class="check"></span></button>
+          <button class="opt" data-value="Self-employed">Self-employed / own my business<span class="check"></span></button>
+        </div>
       </div>
     </div>
 
@@ -474,8 +487,20 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
   const HARD_GATE = false; // set true to block "Under $20k" instead of soft-warning
 
   const steps = ['1','2','3','4','5','6'];
+  const STEP_FIELDS = {
+    '1': ['intent'],
+    '2': ['timing'],
+    '3': ['value'],
+    '4': ['deposit'],
+    '5': ['income', 'employment']
+  };
   let current = 0;
   const answers = {};
+
+  function updateNextButtonState() {
+    const fields = STEP_FIELDS[steps[current]] || [];
+    document.getElementById('nextBtn').disabled = !fields.every(f => answers[f]);
+  }
 
   const progressRow = document.getElementById('progressRow');
   steps.forEach(() => {
@@ -500,7 +525,7 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
       opt.classList.add('selected');
       const field = group.dataset.field;
       answers[field] = opt.dataset.value;
-      document.getElementById('nextBtn').disabled = false;
+      updateNextButtonState();
 
       if (field === 'deposit') {
         const note = document.getElementById('gateNote');
@@ -535,8 +560,7 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
     } else {
       navRow.style.display = 'flex';
       nextBtn.style.display = (i === steps.length - 1) ? 'none' : 'block';
-      const field = steps[i] === '1' ? 'intent' : steps[i] === '2' ? 'timing' : steps[i] === '3' ? 'value' : steps[i] === '4' ? 'deposit' : 'employment';
-      nextBtn.disabled = !answers[field];
+      updateNextButtonState();
     }
     renderProgress();
   }
@@ -582,6 +606,7 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
     formData.append('timing', answers.timing || '');
     formData.append('price_range', answers.value || '');
     formData.append('deposit_band', answers.deposit || '');
+    formData.append('income_range', answers.income || '');
     formData.append('employment_type', answers.employment || '');
 
     try {
@@ -606,6 +631,7 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
             timing: answers.timing || '',
             price_range: answers.value || '',
             deposit_band: answers.deposit || '',
+            income_range: answers.income || '',
             employment_type: answers.employment || ''
           }).toString()
         }).catch(function() {});
