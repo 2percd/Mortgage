@@ -287,6 +287,16 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
   }
   .reassure a { color: var(--gold); text-decoration: underline; }
 
+  .submit-error {
+    display: none;
+    color: #e05c5c;
+    font-size: 13.5px;
+    line-height: 1.5;
+    text-align: center;
+    margin-top: 12px;
+  }
+  .submit-error.show { display: block; }
+
   .nav {
     display: flex;
     gap: 10px;
@@ -463,6 +473,7 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
       </div>
       <p class="reassure">Free. Brokers are legally required to work in your best interest, not the lender's. By submitting this form, you agree to share your contact details and loan information with a licensed local Perth mortgage broker, who will call you about home loan options. No obligation to proceed. <a href="/privacy.html">Privacy Policy</a></p>
       <button class="btn btn-primary" id="submitBtn" disabled onclick="submitForm()">Get My Quote</button>
+      <p class="submit-error" id="submitError">Something went wrong sending your details. Please check your connection and try again.</p>
     </div>
 
     <!-- Done state -->
@@ -592,9 +603,11 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
 
   async function submitForm() {
     const btn = document.getElementById('submitBtn');
+    const errorMsg = document.getElementById('submitError');
     const originalText = btn.textContent;
     btn.disabled = true;
     btn.textContent = 'Sending…';
+    errorMsg.classList.remove('show');
 
     const formData = new FormData();
     formData.append('access_key', 'eca1882f-f8d7-4ea0-ba4f-c3e431e6cfdf');
@@ -642,21 +655,19 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
         document.getElementById('navRow').style.display = 'none';
         renderProgress();
       } else {
-        showSubmitError(btn, originalText);
+        console.error('Web3Forms submission returned an unsuccessful response:', data);
+        showSubmitError(btn, originalText, errorMsg);
       }
     } catch (err) {
-      showSubmitError(btn, originalText);
+      console.error('Web3Forms submission failed:', err);
+      showSubmitError(btn, originalText, errorMsg);
     }
   }
 
-  function showSubmitError(btn, originalText) {
-    btn.style.background = '#c04a4a';
-    btn.textContent = 'Something went wrong. Try again.';
+  function showSubmitError(btn, originalText, errorMsg) {
     btn.disabled = false;
-    setTimeout(() => {
-      btn.style.background = '';
-      btn.textContent = originalText;
-    }, 3000);
+    btn.textContent = originalText;
+    errorMsg.classList.add('show');
   }
 
   showStep(0);
