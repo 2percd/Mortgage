@@ -266,6 +266,15 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
   .field select:invalid { color: var(--placeholder); }
   select option { background: #1A2035; color: var(--text); }
   .field input:focus, .field select:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: var(--gold); }
+  .field input.invalid { border-color: #e05c5c; }
+  .field-error {
+    display: none;
+    color: #e05c5c;
+    font-size: 12px;
+    line-height: 1.4;
+    margin-top: 6px;
+  }
+  .field-error.show { display: block; }
   .field input:-webkit-autofill,
   .field input:-webkit-autofill:hover,
   .field input:-webkit-autofill:focus {
@@ -452,14 +461,17 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
       <div class="field">
         <label for="fName">Full name</label>
         <input type="text" id="fName" placeholder="Jordan Smith">
+        <p class="field-error" id="fNameError">Please enter your full name.</p>
       </div>
       <div class="field">
         <label for="fEmail">Email</label>
         <input type="email" id="fEmail" placeholder="jordan@email.com">
+        <p class="field-error" id="fEmailError">Please enter a valid email address.</p>
       </div>
       <div class="field">
         <label for="fPhone">Mobile</label>
         <input type="tel" id="fPhone" placeholder="04XX XXX XXX">
+        <p class="field-error" id="fPhoneError">Please enter a valid Australian mobile or landline.</p>
       </div>
       <div class="field">
         <label for="fTime">Best time to contact</label>
@@ -601,16 +613,77 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
     }
   }
 
+  const touched = { fName: false, fEmail: false, fPhone: false };
+
   ['fName','fEmail','fPhone'].forEach(id => {
-    document.getElementById(id).addEventListener('input', checkContactValid);
+    const el = document.getElementById(id);
+    el.addEventListener('input', checkContactValid);
+    el.addEventListener('blur', function() {
+      touched[id] = true;
+      checkContactValid();
+    });
   });
   document.getElementById('fTime').addEventListener('change', checkContactValid);
+
+  function isValidName(value) {
+    const letterCount = (value.match(/\p{L}/gu) || []).length;
+    return letterCount >= 2;
+  }
+
+  function isValidEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(value);
+  }
+
+  function cleanAuPhone(raw) {
+    let cleaned = raw.replace(/[\s\-()]/g, '');
+    if (cleaned.indexOf('+61') === 0) {
+      cleaned = '0' + cleaned.slice(3);
+    } else if (cleaned.indexOf('61') === 0) {
+      cleaned = '0' + cleaned.slice(2);
+    }
+    return cleaned;
+  }
+
+  function getValidAuPhone(raw) {
+    const cleaned = cleanAuPhone(raw);
+    if (!/^\d{10}$/.test(cleaned)) return null;
+    const prefix = cleaned.slice(0, 2);
+    if (['04', '02', '03', '07', '08'].indexOf(prefix) === -1) return null;
+    if (/^(\d)\1{9}$/.test(cleaned)) return null;
+    const suffix = cleaned.slice(2);
+    if (/^(\d)\1{7}$/.test(suffix)) return null;
+    let ascending = true;
+    let descending = true;
+    for (let i = 1; i < suffix.length; i++) {
+      const prev = suffix.charCodeAt(i - 1);
+      const cur = suffix.charCodeAt(i);
+      if (cur !== prev + 1) ascending = false;
+      if (cur !== prev - 1) descending = false;
+    }
+    if (ascending || descending) return null;
+    return cleaned;
+  }
+
+  function setFieldError(inputId, errorId, show) {
+    document.getElementById(inputId).classList.toggle('invalid', show);
+    document.getElementById(errorId).classList.toggle('show', show);
+  }
+
   function checkContactValid() {
-    const n = document.getElementById('fName').value.trim();
-    const e = document.getElementById('fEmail').value.trim();
-    const p = document.getElementById('fPhone').value.trim();
-    const t = document.getElementById('fTime').value;
-    document.getElementById('submitBtn').disabled = !(n && e.includes('@') && p.length >= 10 && t);
+    const nameVal = document.getElementById('fName').value.trim();
+    const emailVal = document.getElementById('fEmail').value.trim();
+    const phoneVal = document.getElementById('fPhone').value.trim();
+    const timeVal = document.getElementById('fTime').value;
+
+    const nameOk = isValidName(nameVal);
+    const emailOk = isValidEmail(emailVal);
+    const phoneOk = getValidAuPhone(phoneVal) !== null;
+
+    setFieldError('fName', 'fNameError', touched.fName && !nameOk);
+    setFieldError('fEmail', 'fEmailError', touched.fEmail && !emailOk);
+    setFieldError('fPhone', 'fPhoneError', touched.fPhone && !phoneOk);
+
+    document.getElementById('submitBtn').disabled = !(nameOk && emailOk && phoneOk && timeVal);
   }
 
   async function submitForm() {
@@ -623,7 +696,7 @@ src="https://www.facebook.com/tr?id=26518442054445340&ev=PageView&noscript=1"
 
     const name = document.getElementById('fName').value.trim();
     const email = document.getElementById('fEmail').value.trim();
-    const phone = document.getElementById('fPhone').value.trim();
+    const phone = getValidAuPhone(document.getElementById('fPhone').value.trim()) || '';
     const bestTime = document.getElementById('fTime').value;
     const utmSource = sessionStorage.getItem('utm_source') || '';
     const utmCampaign = sessionStorage.getItem('utm_campaign') || '';
